@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Stub;
 
-use Irpsv\CarRestApi\Car;
-use Irpsv\CarRestApi\Car\CarRepository;
+use App\Domain\Car;
+use App\Domain\Car\CarRepository;
 
 /**
  * Репа авто

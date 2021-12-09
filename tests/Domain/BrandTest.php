@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain;
 
-use Irpsv\CarRestApi\Brand\BrandService;
-use Irpsv\CarRestApi\Exception\CantCreateWihtoutName;
+use App\Domain\Brand\BrandService;
+use App\Domain\Exception\CantCreateWihtoutName;
 use App\Tests\Domain\Stub\BrandStubRepository;
 use PHPUnit\Framework\TestCase;
 

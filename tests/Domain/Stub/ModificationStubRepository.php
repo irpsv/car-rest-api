@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Stub;
 
-use Irpsv\CarRestApi\Modification;
-use Irpsv\CarRestApi\Modification\ModificationRepository;
+use App\Domain\Modification;
+use App\Domain\Modification\ModificationRepository;
 
 /**
  * Репа модификаций

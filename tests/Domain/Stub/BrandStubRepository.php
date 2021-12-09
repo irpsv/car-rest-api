@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Stub;
 
-use Irpsv\CarRestApi\Brand;
-use Irpsv\CarRestApi\Brand\BrandRepository;
+use App\Domain\Brand;
+use App\Domain\Brand\BrandRepository;
 
 /**
  * Репа марок

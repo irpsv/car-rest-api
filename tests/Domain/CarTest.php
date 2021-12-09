@@ -2,10 +2,10 @@
 
 namespace App\Tests\Domain;
 
-use Irpsv\CarRestApi\Car\CarService;
-use Irpsv\CarRestApi\Exception\YearNotCorrespondModification;
-use Irpsv\CarRestApi\Modification;
-use Irpsv\CarRestApi\Modification\ModificationRepository;
+use App\Domain\Car\CarService;
+use App\Domain\Exception\YearNotCorrespondModification;
+use App\Domain\Modification;
+use App\Domain\Modification\ModificationRepository;
 use App\Tests\Domain\Stub\BaseRepo;
 use App\Tests\Domain\Stub\BodyTypeStubRepository;
 use App\Tests\Domain\Stub\CarStubRepository;

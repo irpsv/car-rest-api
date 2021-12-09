@@ -2,8 +2,8 @@
 
 namespace App\Tests\Domain\Stub;
 
-use Irpsv\CarRestApi\BodyType;
-use Irpsv\CarRestApi\BodyType\BodyTypeRepository;
+use App\Domain\BodyType;
+use App\Domain\BodyType\BodyTypeRepository;
 
 /**
  * Репа кузовов
