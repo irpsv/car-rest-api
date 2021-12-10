@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "00c2117b-5219-4364-b874-2dd91e0d7e30",
+		"name": "CarRestApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://172.27.0.1/brand/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "sssssssss",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://172.27.0.1/brand/create",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"brand",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/brand/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.27.0.1/brand/all?name=PORS",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"brand",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "PORS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/brand/delete/5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://172.27.0.1/brand/delete/4",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"brand",
+						"delete",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/brand/update/2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "KIA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://172.27.0.1/brand/update/2",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"brand",
+						"update",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/body-type/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.27.0.1/body-type/all",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"body-type",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/model/all?size=10000&brand_ids=213,215",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://172.27.0.1/model/all?size=10000&brands=213,215",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"model",
+						"all"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "10000"
+						},
+						{
+							"key": "brands",
+							"value": "213,215"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/modification/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.27.0.1/modification/all",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"modification",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://172.27.0.1/car/all?brands=163&yearProduction_from=2019",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.27.0.1/car/all?brands=215&yearProductionFrom=2019&yearProductionTo=2021",
+					"protocol": "http",
+					"host": [
+						"172",
+						"27",
+						"0",
+						"1"
+					],
+					"path": [
+						"car",
+						"all"
+					],
+					"query": [
+						{
+							"key": "brands",
+							"value": "215"
+						},
+						{
+							"key": "yearProductionFrom",
+							"value": "2019"
+						},
+						{
+							"key": "yearProductionTo",
+							"value": "2021"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
