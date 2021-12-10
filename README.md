@@ -5,6 +5,7 @@
   - [Задача](#задача)
   - [Реализация](#реализация)
   - [Порядок](#порядок)
+  - [Postman](#postman)
 
 ## Задача
 
@@ -21,10 +22,10 @@
 - Машина (например "kia rio 3 седан")
 
 Методы api:
-- марка (add,update,delete,list)
-- модель (add,update,delete,list)
-- модификация (add,update,delete,list)
-- машина (add,update,delete,list)
+- марка (create,update,delete,all)
+- модель (create,update,delete,all)
+- модификация (create,update,delete,all)
+- машина (create,update,delete,all)
 
 ## Порядок
 
@@ -32,4 +33,8 @@
 2. Накидываем модели, сервисы, тесты
 3. Настраиваем докер
 4. Реализуем контроллеры
-5. Реализуем модели
+5. Реализуем репозитории
+
+## Postman
+
+Тестировал API через postman, в корне лежит файл с запросами [CarRestApi.postman_collection.json](./CarRestApi.postman_collection.json)

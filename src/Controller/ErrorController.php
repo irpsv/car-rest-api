@@ -14,7 +14,7 @@ class ErrorController
 
         return new JsonResponse([
             'error' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString(),
+            // 'trace' => $exception->getTraceAsString(),
         ], $status);
     }
 }
