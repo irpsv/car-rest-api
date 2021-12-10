@@ -41,7 +41,7 @@ class BodyTypeStubRepository extends BaseRepo implements BodyTypeRepository
     /**
      * @inheritDoc
      */
-    public function findById(int $id): ?BodyType
+    public function getById(int $id): ?BodyType
     {
         return $this->getItems()[$id] ?? null;
     }
@@ -49,7 +49,7 @@ class BodyTypeStubRepository extends BaseRepo implements BodyTypeRepository
     /**
      * @inheritDoc
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
         return $this->getItems();
     }

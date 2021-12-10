@@ -45,8 +45,8 @@ class CarTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $repo->method('findById')->willReturn($modification);
-        $repo->method('find')->willReturn([ $modification ]);
+        $repo->method('getById')->willReturn($modification);
+        $repo->method('getAll')->willReturn([ $modification ]);
 
         return $repo;
     }
@@ -91,7 +91,7 @@ class CarTest extends TestCase
         $this->assertEquals($car->bodyTypeId, $bodyTypeId);
         $this->assertEquals($car->yearProduction, 2011);
 
-        $cars = $service->find();
+        $cars = $service->getAll();
         $this->assertCount(1, $cars);
         $this->assertEquals($cars[1]->getId(), $car->getId());
     }

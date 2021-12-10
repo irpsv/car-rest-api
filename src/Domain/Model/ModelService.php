@@ -36,7 +36,7 @@ class ModelService
      */
     public function create(int $brandId, string $name): Model
     {
-        $brand = $this->brandRepo->findById($brandId);
+        $brand = $this->brandRepo->getById($brandId);
         if (!$brand) {
             throw new NotFoundEntity(Brand::class);
         }
@@ -56,7 +56,7 @@ class ModelService
      */
     public function update(int $id, string $name): Model
     {
-        $entity = $this->repo->findById($id);
+        $entity = $this->repo->getById($id);
         if (!$entity) {
             throw new NotFoundEntity(Model::class);
         }
@@ -85,9 +85,9 @@ class ModelService
      * @param mixed $criteria
      * @return Model[]
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
-        return $this->repo->find($criteria);
+        return $this->repo->getAll($criteria);
     }
 
     /**
@@ -96,8 +96,8 @@ class ModelService
      * @param int $id
      * @return Model|null
      */
-    public function findById(int $id): ?Model
+    public function getById(int $id): ?Model
     {
-        return $this->repo->findById($id);
+        return $this->repo->getById($id);
     }
 }

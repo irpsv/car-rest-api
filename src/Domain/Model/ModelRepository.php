@@ -34,7 +34,7 @@ interface ModelRepository
      * @param int $id
      * @return Model|null
      */
-    public function findById(int $id): ?Model;
+    public function getById(int $id): ?Model;
 
     /**
      * Поиск по условию
@@ -42,5 +42,5 @@ interface ModelRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @return Model[]
      */
-    public function find($criteria = null);
+    public function getAll($criteria = null);
 }

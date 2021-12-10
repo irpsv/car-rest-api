@@ -34,7 +34,7 @@ interface ModificationRepository
      * @param int $id
      * @return Modification|null
      */
-    public function findById(int $id): ?Modification;
+    public function getById(int $id): ?Modification;
 
     /**
      * Поиск по условию
@@ -42,5 +42,5 @@ interface ModificationRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @return Modification[]
      */
-    public function find($criteria = null);
+    public function getAll($criteria = null);
 }

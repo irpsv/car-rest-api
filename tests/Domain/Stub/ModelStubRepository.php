@@ -34,7 +34,7 @@ class ModelStubRepository extends BaseRepo implements ModelRepository
     /**
      * @inheritDoc
      */
-    public function findById(int $id): ?Model
+    public function getById(int $id): ?Model
     {
         return $this->getItems()[$id] ?? null;
     }
@@ -42,7 +42,7 @@ class ModelStubRepository extends BaseRepo implements ModelRepository
     /**
      * @inheritDoc
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
         return $this->getItems();
     }

@@ -44,7 +44,7 @@ class BrandService
      */
     public function update(int $id, string $name): Brand
     {
-        $entity = $this->repo->findById($id);
+        $entity = $this->repo->getById($id);
         if (!$entity) {
             throw new NotFoundEntity(Brand::class);
         }
@@ -73,9 +73,9 @@ class BrandService
      * @param mixed $criteria
      * @return Brand[]
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
-        return $this->repo->find($criteria);
+        return $this->repo->getAll($criteria);
     }
 
     /**
@@ -84,8 +84,8 @@ class BrandService
      * @param int $id
      * @return Brand|null
      */
-    public function findById(int $id): ?Brand
+    public function getById(int $id): ?Brand
     {
-        return $this->repo->findById($id);
+        return $this->repo->getById($id);
     }
 }

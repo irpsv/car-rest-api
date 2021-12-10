@@ -34,7 +34,7 @@ class ModificationStubRepository extends BaseRepo implements ModificationReposit
     /**
      * @inheritDoc
      */
-    public function findById(int $id): ?Modification
+    public function getById(int $id): ?Modification
     {
         return $this->getItems()[$id] ?? null;
     }
@@ -42,7 +42,7 @@ class ModificationStubRepository extends BaseRepo implements ModificationReposit
     /**
      * @inheritDoc
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
         return $this->getItems();
     }

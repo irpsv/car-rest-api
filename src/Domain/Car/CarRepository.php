@@ -34,7 +34,7 @@ interface CarRepository
      * @param int $id
      * @return Car|null
      */
-    public function findById(int $id): ?Car;
+    public function getById(int $id): ?Car;
 
     /**
      * Поиск по условию
@@ -42,5 +42,5 @@ interface CarRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @return Car[]
      */
-    public function find($criteria = null);
+    public function getAll($criteria = null);
 }

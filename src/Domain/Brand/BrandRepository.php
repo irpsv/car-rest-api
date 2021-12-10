@@ -34,7 +34,7 @@ interface BrandRepository
      * @param int $id
      * @return Brand|null
      */
-    public function findById(int $id): ?Brand;
+    public function getById(int $id): ?Brand;
 
     /**
      * Поиск по условию
@@ -42,5 +42,5 @@ interface BrandRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @return Brand[]
      */
-    public function find($criteria = null);
+    public function getAll($criteria = null);
 }

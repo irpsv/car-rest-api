@@ -34,7 +34,7 @@ class CarStubRepository extends BaseRepo implements CarRepository
     /**
      * @inheritDoc
      */
-    public function findById(int $id): ?Car
+    public function getById(int $id): ?Car
     {
         return $this->getItems()[$id] ?? null;
     }
@@ -42,7 +42,7 @@ class CarStubRepository extends BaseRepo implements CarRepository
     /**
      * @inheritDoc
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
         return $this->getItems();
     }

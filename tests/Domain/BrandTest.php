@@ -42,7 +42,7 @@ class BrandTest extends TestCase
         $audi = $service->create('Audi');
         $mers = $service->create('Mercedes-Benz');
 
-        $brands = $service->find();
+        $brands = $service->getAll();
         $this->assertCount(3, $brands);
         $this->assertEquals($brands[1]->getId(), $bmw->getId());
         $this->assertEquals($brands[2]->getId(), $audi->getId());
@@ -94,7 +94,7 @@ class BrandTest extends TestCase
 
         $service->delete($id);
 
-        $bmw = $service->findById($id);
+        $bmw = $service->getById($id);
         $this->assertNull($bmw);
     }
 }

@@ -44,7 +44,7 @@ class BodyTypeService
      */
     public function update(int $id, string $name): BodyType
     {
-        $entity = $this->repo->findById($id);
+        $entity = $this->repo->getById($id);
         if (!$entity) {
             throw new NotFoundEntity(BodyType::class);
         }
@@ -73,9 +73,9 @@ class BodyTypeService
      * @param mixed $criteria
      * @return BodyType[]
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
-        return $this->repo->find($criteria);
+        return $this->repo->getAll($criteria);
     }
 
     /**
@@ -84,8 +84,8 @@ class BodyTypeService
      * @param int $id
      * @return BodyType|null
      */
-    public function findById(int $id): ?BodyType
+    public function getById(int $id): ?BodyType
     {
-        return $this->repo->findById($id);
+        return $this->repo->getById($id);
     }
 }

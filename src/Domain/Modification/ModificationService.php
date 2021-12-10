@@ -42,7 +42,7 @@ class ModificationService
             'productionYearStart',
         ]);
 
-        $model = $this->modelRepo->findById($modelId);
+        $model = $this->modelRepo->getById($modelId);
         if (!$model) {
             throw new NotFoundEntity(Model::class);
         }
@@ -66,7 +66,7 @@ class ModificationService
      */
     public function update(int $id, array $values): Modification
     {
-        $entity = $this->repo->findById($id);
+        $entity = $this->repo->getById($id);
         if (!$entity) {
             throw new NotFoundEntity(Modification::class);
         }
@@ -101,9 +101,9 @@ class ModificationService
      * @param mixed $criteria
      * @return Modification[]
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
-        return $this->repo->find($criteria);
+        return $this->repo->getAll($criteria);
     }
 
     /**
@@ -112,8 +112,8 @@ class ModificationService
      * @param int $id
      * @return Modification|null
      */
-    public function findById(int $id): ?Modification
+    public function getById(int $id): ?Modification
     {
-        return $this->repo->findById($id);
+        return $this->repo->getById($id);
     }
 }

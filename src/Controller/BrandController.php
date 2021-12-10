@@ -16,12 +16,58 @@ class BrandController
     }
 
     /**
+     * Успешное выполнение
+     *
+     * @return JsonResponse
+     */
+    private function success(): JsonResponse
+    {
+        return new JsonResponse(['success' => true]);
+    }
+
+    /**
      * @Route("/brand/all")
      *
      * @return JsonResponse
      */
     public function all(): JsonResponse
     {
-        return new JsonResponse($this->service->find());
+        return new JsonResponse($this->service->getAll());
+    }
+
+    /**
+     * @Route("/brand/create", methods={"POST"})
+     *
+     * @return JsonResponse
+     */
+    public function create(string $name): JsonResponse
+    {
+        $this->service->create($name);
+
+        return $this->success();
+    }
+
+    /**
+     * @Route("/brand/update/{id}", methods={"POST"})
+     *
+     * @return JsonResponse
+     */
+    public function update(int $id, string $name): JsonResponse
+    {
+        $this->service->update($id, $name);
+
+        return $this->success();
+    }
+
+    /**
+     * @Route("/brand/delete/{id}", methods={"POST"})
+     *
+     * @return JsonResponse
+     */
+    public function delete(int $id): JsonResponse
+    {
+        $this->service->delete($id);
+
+        return $this->success();
     }
 }

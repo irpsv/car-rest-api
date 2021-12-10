@@ -34,7 +34,7 @@ class BrandStubRepository extends BaseRepo implements BrandRepository
     /**
      * @inheritDoc
      */
-    public function findById(int $id): ?Brand
+    public function getById(int $id): ?Brand
     {
         return $this->getItems()[$id] ?? null;
     }
@@ -42,7 +42,7 @@ class BrandStubRepository extends BaseRepo implements BrandRepository
     /**
      * @inheritDoc
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
         return $this->getItems();
     }

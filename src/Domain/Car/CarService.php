@@ -44,12 +44,12 @@ class CarService
      */
     public function create(int $modificationId, int $bodyTypeId, int $yearProduction): Car
     {
-        $modification = $this->modificationRepo->findById($modificationId);
+        $modification = $this->modificationRepo->getById($modificationId);
         if (!$modification) {
             throw new NotFoundEntity(Modification::class);
         }
 
-        $bodyType = $this->bodyTypeRepo->findById($bodyTypeId);
+        $bodyType = $this->bodyTypeRepo->getById($bodyTypeId);
         if (!$bodyType) {
             throw new NotFoundEntity(BodyType::class);
         }
@@ -90,9 +90,9 @@ class CarService
      * @param mixed $criteria
      * @return Car[]
      */
-    public function find($criteria = null)
+    public function getAll($criteria = null)
     {
-        return $this->repo->find($criteria);
+        return $this->repo->getAll($criteria);
     }
 
     /**
@@ -101,8 +101,8 @@ class CarService
      * @param int $id
      * @return Car|null
      */
-    public function findById(int $id): ?Car
+    public function getById(int $id): ?Car
     {
-        return $this->repo->findById($id);
+        return $this->repo->getById($id);
     }
 }

@@ -34,7 +34,7 @@ interface BodyTypeRepository
      * @param int $id
      * @return BodyType|null
      */
-    public function findById(int $id): ?BodyType;
+    public function getById(int $id): ?BodyType;
 
     /**
      * Поиск по условию
@@ -42,5 +42,5 @@ interface BodyTypeRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @return BodyType[]
      */
-    public function find($criteria = null);
+    public function getAll($criteria = null);
 }
