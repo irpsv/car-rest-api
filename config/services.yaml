@@ -27,3 +27,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # делаем контейнеры публичными, чтобы в миграциях можно было использовать
+    App\Domain\Brand\BrandService:
+        public: true
+
+    App\Domain\BodyType\BodyTypeService:
+        public: true
+
+    App\Domain\Model\ModelService:
+        public: true
+
+    App\Domain\Modification\ModificationService:
+        public: true
+
+    App\Domain\Car\CarService:
+        public: true

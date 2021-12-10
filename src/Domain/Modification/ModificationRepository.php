@@ -42,7 +42,7 @@ interface ModificationRepository
      * @param mixed $criteria тип условия зависит от используемой ORM, если не указано то поиск всех записей
      * @param int|null $page текущая страница
      * @param int|null $size размер страница
-     * @return Brand[]
+     * @return Modification[]
      */
     public function getAll($criteria = null, ?int $page = null, ?int $size = null);
 }

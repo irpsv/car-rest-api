@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Domain\Brand;
-use App\Domain\Brand\BrandRepository;
+use App\Domain\Model;
+use App\Domain\Model\ModelRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,21 +11,21 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Репа 
  */
-class BrandOrmRepository extends ServiceEntityRepository implements BrandRepository
+class ModelOrmRepository extends ServiceEntityRepository implements ModelRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Brand::class);
+        parent::__construct($registry, Model::class);
     }
 
     /**
      * Создание или редактирование
      *
-     * @param Brand $entity
+     * @param Model $entity
      * @return void
      * @throws Exception в случае ошибок
      */
-    public function save(Brand $entity): void
+    public function save(Model $entity): void
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
@@ -51,9 +51,9 @@ class BrandOrmRepository extends ServiceEntityRepository implements BrandReposit
      * Поиск по ид
      *
      * @param int $id
-     * @return Brand|null
+     * @return Model|null
      */
-    public function getById(int $id): ?Brand
+    public function getById(int $id): ?Model
     {
         return $this->findOneBy([
             'id' => $id,

@@ -2,18 +2,18 @@
 
 namespace App\Controller;
 
-use App\Domain\Brand\BrandService;
+use App\Domain\Modification\ModificationService;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BrandController
+class ModificationController
 {
-    private BrandService $service;
+    private ModificationService $service;
 
-    public function __construct(BrandService $service)
+    public function __construct(ModificationService $service)
     {
         $this->service = $service;
     }
@@ -33,7 +33,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/all")
+     * @Route("/modification/all")
      *
      * @return JsonResponse
      */
@@ -60,33 +60,35 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/create", methods={"POST"})
+     * @Route("/modification/create", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
-        $name = (string) $request->request->get('name');
-        $brand = $this->service->create($name);
+        $values = (array) $request->request->get('values');
+        $modificationId = (int) $request->request->get('modificationId');
 
-        return $this->success($brand->getId());
+        $entity = $this->service->create($modificationId, $values);
+
+        return $this->success($entity->getId());
     }
 
     /**
-     * @Route("/brand/update/{id}", methods={"POST"})
+     * @Route("/modification/update/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function update(int $id, Request $request): JsonResponse
     {
-        $name = (string) $request->request->get('name');
-        $this->service->update($id, $name);
+        $values = (array) $request->request->get('values');
+        $this->service->update($id, $values);
 
         return $this->success($id);
     }
 
     /**
-     * @Route("/brand/delete/{id}", methods={"POST"})
+     * @Route("/modification/delete/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */

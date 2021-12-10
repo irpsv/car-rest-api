@@ -2,8 +2,10 @@
 
 namespace App\Tests\Domain;
 
+use App\Domain\Brand;
 use App\Domain\Car\CarService;
 use App\Domain\Exception\YearNotCorrespondModification;
+use App\Domain\Model;
 use App\Domain\Modification;
 use App\Domain\Modification\ModificationRepository;
 use App\Tests\Domain\Stub\BaseRepo;
@@ -15,6 +17,7 @@ use ReflectionClass;
 class CarTest extends TestCase
 {
     private CarService $service;
+    private BodyTypeStubRepository $bodyTypeRepo;
 
     /**
      * Создание сервиса
@@ -26,7 +29,7 @@ class CarTest extends TestCase
         if (!isset($this->service)) {
             $this->service = new CarService(
                 $this->getModificationRepo(),
-                new BodyTypeStubRepository,
+                $this->bodyTypeRepo = new BodyTypeStubRepository,
                 new CarStubRepository
             );
         }
@@ -59,8 +62,8 @@ class CarTest extends TestCase
         $ref = new ReflectionClass(Modification::class);
 
         $modification = $ref->newInstanceWithoutConstructor();
-        $modification->brandId = 5;
-        $modification->modelId = 7;
+        $modification->brand = new Brand('BMW');
+        $modification->model = new Model('X3', $modification->brand);
         $modification->setName('3 поколение');
         $modification->productionYearStart = 2010;
         $modification->productionYearEnd = 2014;
@@ -82,13 +85,15 @@ class CarTest extends TestCase
         
         $modification = $this->getDefaulModification();
         $modificationId = 11;
-        $bodyTypeId = 2; // хетчбэк
+
+        $bodyTypeId = 2;
+        $bodyType = $this->bodyTypeRepo->getById($bodyTypeId);
 
         $car = $service->create($modificationId, $bodyTypeId, 2011);
-        $this->assertEquals($car->brandId, $modification->brandId);
-        $this->assertEquals($car->modificationId, $modification->getId());
-        $this->assertEquals($car->modelId, $modification->modelId);
-        $this->assertEquals($car->bodyTypeId, $bodyTypeId);
+        $this->assertEquals($car->brand, $modification->brand);
+        $this->assertEquals($car->modification, $modification);
+        $this->assertEquals($car->model, $modification->model);
+        $this->assertEquals($car->bodyType, $bodyType);
         $this->assertEquals($car->yearProduction, 2011);
 
         $cars = $service->getRepo()->getAll();

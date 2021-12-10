@@ -2,18 +2,16 @@
 
 namespace App\Controller;
 
-use App\Domain\Brand\BrandService;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Expr\Comparison;
+use App\Domain\Model\ModelService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BrandController
+class ModelController
 {
-    private BrandService $service;
+    private ModelService $service;
 
-    public function __construct(BrandService $service)
+    public function __construct(ModelService $service)
     {
         $this->service = $service;
     }
@@ -33,7 +31,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/all")
+     * @Route("/model/all")
      *
      * @return JsonResponse
      */
@@ -49,31 +47,36 @@ class BrandController
             $page = 1;
         }
 
-        $criteria = new Criteria();
-        if ($name = (string) $request->query->get('name')) {
-            $criteria->where(new Comparison('name', Comparison::CONTAINS, $name));
+        $criteria = [];
+
+        $brands = (string) $request->query->get('brands', '');
+        if ($brands) {
+            $criteria['brand'] = explode(',', $brands);
         }
 
+        $criteria = array_filter($criteria);
         $items = $this->service->getRepo()->getAll($criteria, $page, $size);
 
         return new JsonResponse($items);
     }
 
     /**
-     * @Route("/brand/create", methods={"POST"})
+     * @Route("/model/create", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
         $name = (string) $request->request->get('name');
-        $brand = $this->service->create($name);
+        $brandId = (int) $request->request->get('brandId');
 
-        return $this->success($brand->getId());
+        $entity = $this->service->create($brandId, $name);
+
+        return $this->success($entity->getId());
     }
 
     /**
-     * @Route("/brand/update/{id}", methods={"POST"})
+     * @Route("/model/update/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */
@@ -86,7 +89,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/delete/{id}", methods={"POST"})
+     * @Route("/model/delete/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */

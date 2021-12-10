@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Domain\Brand;
-use App\Domain\Brand\BrandRepository;
+use App\Domain\BodyType;
+use App\Domain\BodyType\BodyTypeRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,21 +11,21 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Репа 
  */
-class BrandOrmRepository extends ServiceEntityRepository implements BrandRepository
+class BodyTypeOrmRepository extends ServiceEntityRepository implements BodyTypeRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Brand::class);
+        parent::__construct($registry, BodyType::class);
     }
 
     /**
      * Создание или редактирование
      *
-     * @param Brand $entity
+     * @param BodyType $entity
      * @return void
      * @throws Exception в случае ошибок
      */
-    public function save(Brand $entity): void
+    public function save(BodyType $entity): void
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
@@ -51,9 +51,9 @@ class BrandOrmRepository extends ServiceEntityRepository implements BrandReposit
      * Поиск по ид
      *
      * @param int $id
-     * @return Brand|null
+     * @return BodyType|null
      */
-    public function getById(int $id): ?Brand
+    public function getById(int $id): ?BodyType
     {
         return $this->findOneBy([
             'id' => $id,

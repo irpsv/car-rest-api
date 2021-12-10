@@ -2,26 +2,44 @@
 
 namespace App\Domain;
 
-use App\Domain\Exception\NameIsRequired;
-use App\Domain\Exception\EntityWithoutId;
 use App\Domain\Exception\YearNotCorrespondModification;
 use App\Domain\Helper\IdentifiedEntity;
 use App\Domain\Helper\Nameable;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Модификация авто
+ * 
+ * @ORM\Entity
  */
 class Modification extends Entity
 {
     use IdentifiedEntity;
     use Nameable;
     
-    public int $brandId;
-    public int $modelId;
+    /**
+     * @ORM\ManyToOne(targetEntity="Brand")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    public Brand $brand;
+    /**
+     * @ORM\ManyToOne(targetEntity="Model")
+     * @ORM\JoinColumn(name="model_id", referencedColumnName="id")
+     */
+    public Model $model;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
     protected string $name;
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
     public int $productionYearStart;
     /**
      * @var int|null если null - значит производится до сих пор
+     * @ORM\Column(type="integer")
      */
     public ?int $productionYearEnd;
 
@@ -31,13 +49,9 @@ class Modification extends Entity
         int $productionYearStart,
         ?int $productionYearEnd = null
     ) {
-        if (!$model->getId()) {
-            throw new EntityWithoutId(get_class($model));
-        }
-
         $this->setName($name);
-        $this->modelId = $model->getId();
-        $this->brandId = $model->brandId;
+        $this->model = $model;
+        $this->brand = $model->brand;
         $this->productionYearStart = $productionYearStart;
         $this->productionYearEnd = $productionYearEnd;
     }
@@ -66,8 +80,8 @@ class Modification extends Entity
     {
         return [
             'id' => $this->getId(),
-            'brandId' => $this->brandId,
-            'modelId' => $this->modelId,
+            'brand' => $this->brand,
+            'model' => $this->model,
             'name' => $this->name,
             'productionYearStart' => $this->productionYearStart,
             'productionYearEnd' => $this->productionYearEnd,

@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use App\Domain\Brand\BrandService;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Expr\Comparison;
+use App\Domain\Car\CarFilter;
+use App\Domain\Car\CarService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BrandController
+class CarController
 {
-    private BrandService $service;
+    private CarService $service;
 
-    public function __construct(BrandService $service)
+    public function __construct(CarService $service)
     {
         $this->service = $service;
     }
@@ -33,7 +32,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/all")
+     * @Route("/car/all")
      *
      * @return JsonResponse
      */
@@ -49,44 +48,42 @@ class BrandController
             $page = 1;
         }
 
-        $criteria = new Criteria();
-        if ($name = (string) $request->query->get('name')) {
-            $criteria->where(new Comparison('name', Comparison::CONTAINS, $name));
-        }
-
+        $criteria = CarFilter::createFromRequest($request)->getCriteria();
         $items = $this->service->getRepo()->getAll($criteria, $page, $size);
 
         return new JsonResponse($items);
     }
 
     /**
-     * @Route("/brand/create", methods={"POST"})
+     * @Route("/car/create", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
-        $name = (string) $request->request->get('name');
-        $brand = $this->service->create($name);
+        $modificationId = (int) $request->request->get('modificationId');
+        $bodyTypeId = (int) $request->request->get('bodyTypeId');
+        $yearProduction = (int) $request->request->get('yearProduction');
 
-        return $this->success($brand->getId());
+        $entity = $this->service->create($modificationId, $bodyTypeId, $yearProduction);
+
+        return $this->success($entity->getId());
     }
 
     /**
-     * @Route("/brand/update/{id}", methods={"POST"})
+     * @Route("/car/update/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function update(int $id, Request $request): JsonResponse
     {
-        $name = (string) $request->request->get('name');
-        $this->service->update($id, $name);
+        $this->service->update($id, []);
 
         return $this->success($id);
     }
 
     /**
-     * @Route("/brand/delete/{id}", methods={"POST"})
+     * @Route("/car/delete/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */

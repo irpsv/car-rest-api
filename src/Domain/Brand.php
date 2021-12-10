@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Бренд авто
  * 
- * @ORM\Entity(repositoryClass=BrandRepository::class)
+ * @ORM\Entity
  */
 class Brand extends Entity
 {
@@ -18,7 +18,6 @@ class Brand extends Entity
     
     /**
      * @var string
-     * 
      * @ORM\Column(type="string", length=255)
      */
     protected string $name;

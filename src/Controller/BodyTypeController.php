@@ -2,18 +2,16 @@
 
 namespace App\Controller;
 
-use App\Domain\Brand\BrandService;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Expr\Comparison;
+use App\Domain\BodyType\BodyTypeService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BrandController
+class BodyTypeController
 {
-    private BrandService $service;
+    private BodyTypeService $service;
 
-    public function __construct(BrandService $service)
+    public function __construct(BodyTypeService $service)
     {
         $this->service = $service;
     }
@@ -33,7 +31,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/all")
+     * @Route("/body-type/all")
      *
      * @return JsonResponse
      */
@@ -49,31 +47,26 @@ class BrandController
             $page = 1;
         }
 
-        $criteria = new Criteria();
-        if ($name = (string) $request->query->get('name')) {
-            $criteria->where(new Comparison('name', Comparison::CONTAINS, $name));
-        }
-
-        $items = $this->service->getRepo()->getAll($criteria, $page, $size);
+        $items = $this->service->getRepo()->getAll(null, $page, $size);
 
         return new JsonResponse($items);
     }
 
     /**
-     * @Route("/brand/create", methods={"POST"})
+     * @Route("/body-type/create", methods={"POST"})
      *
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
         $name = (string) $request->request->get('name');
-        $brand = $this->service->create($name);
+        $entity = $this->service->create($name);
 
-        return $this->success($brand->getId());
+        return $this->success($entity->getId());
     }
 
     /**
-     * @Route("/brand/update/{id}", methods={"POST"})
+     * @Route("/body-type/update/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */
@@ -86,7 +79,7 @@ class BrandController
     }
 
     /**
-     * @Route("/brand/delete/{id}", methods={"POST"})
+     * @Route("/body-type/delete/{id}", methods={"POST"})
      *
      * @return JsonResponse
      */
