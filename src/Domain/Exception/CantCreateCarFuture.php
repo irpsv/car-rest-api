@@ -9,5 +9,8 @@ use Exception;
  */
 class CantCreateCarFuture extends Exception
 {
-
+    public function __construct()
+    {
+        parent::__construct("Can't create car with future production date");
+    }
 }

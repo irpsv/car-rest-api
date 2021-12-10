@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\Brand\BrandService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BrandController
@@ -18,11 +19,15 @@ class BrandController
     /**
      * Успешное выполнение
      *
+     * @param int $id
      * @return JsonResponse
      */
-    private function success(): JsonResponse
+    private function success(int $id): JsonResponse
     {
-        return new JsonResponse(['success' => true]);
+        return new JsonResponse([
+            'success' => true,
+            'id' => $id,
+        ]);
     }
 
     /**
@@ -30,9 +35,21 @@ class BrandController
      *
      * @return JsonResponse
      */
-    public function all(): JsonResponse
+    public function all(Request $request): JsonResponse
     {
-        return new JsonResponse($this->service->getAll());
+        $page = (int) $request->query->get('page', 1);
+        $size = (int) $request->query->get('size', 50);
+
+        if ($size < 1) {
+            $size = 1;
+        }
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $items = $this->service->getRepo()->getAll(null, $page, $size);
+
+        return new JsonResponse($items);
     }
 
     /**
@@ -40,11 +57,12 @@ class BrandController
      *
      * @return JsonResponse
      */
-    public function create(string $name): JsonResponse
+    public function create(Request $request): JsonResponse
     {
-        $this->service->create($name);
+        $name = (string) $request->request->get('name');
+        $brand = $this->service->create($name);
 
-        return $this->success();
+        return $this->success($brand->getId());
     }
 
     /**
@@ -52,11 +70,12 @@ class BrandController
      *
      * @return JsonResponse
      */
-    public function update(int $id, string $name): JsonResponse
+    public function update(int $id, Request $request): JsonResponse
     {
+        $name = (string) $request->request->get('name');
         $this->service->update($id, $name);
 
-        return $this->success();
+        return $this->success($id);
     }
 
     /**
@@ -68,6 +87,6 @@ class BrandController
     {
         $this->service->delete($id);
 
-        return $this->success();
+        return $this->success($id);
     }
 }

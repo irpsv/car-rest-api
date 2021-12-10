@@ -2,25 +2,33 @@
 
 namespace App\Domain;
 
-use App\Domain\Exception\CantCreateWihtoutName;
+use App\Domain\Exception\NameIsRequired;
 use App\Domain\Helper\IdentifiedEntity;
+use App\Domain\Helper\Nameable;
 
 /**
  * Тип кузова
  */
-class BodyType
+class BodyType extends Entity
 {
     use IdentifiedEntity;
-
-    public string $name;
+    use Nameable;
+    
+    protected string $name;
 
     public function __construct(string $name)
     {
-        $name = trim($name);
-        if (empty($name)) {
-            throw new CantCreateWihtoutName(get_called_class());
-        }
-        
-        $this->name = $name;
+        $this->setName($name);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->name,
+        ];
     }
 }

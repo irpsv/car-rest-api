@@ -61,7 +61,7 @@ class CarTest extends TestCase
         $modification = $ref->newInstanceWithoutConstructor();
         $modification->brandId = 5;
         $modification->modelId = 7;
-        $modification->name = '3 поколение';
+        $modification->setName('3 поколение');
         $modification->productionYearStart = 2010;
         $modification->productionYearEnd = 2014;
 
@@ -91,7 +91,7 @@ class CarTest extends TestCase
         $this->assertEquals($car->bodyTypeId, $bodyTypeId);
         $this->assertEquals($car->yearProduction, 2011);
 
-        $cars = $service->getAll();
+        $cars = $service->getRepo()->getAll();
         $this->assertCount(1, $cars);
         $this->assertEquals($cars[1]->getId(), $car->getId());
     }

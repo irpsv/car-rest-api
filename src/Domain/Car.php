@@ -9,10 +9,10 @@ use App\Domain\Helper\IdentifiedEntity;
 /**
  * АААААААвтомобиль
  */
-class Car
+class Car extends Entity
 {
     use IdentifiedEntity;
-
+    
     public int $brandId;
     public int $modelId;
     public int $modificationId;
@@ -44,5 +44,20 @@ class Car
         $this->modificationId = $modification->getId();
         $this->bodyTypeId = $bodyType->getId();
         $this->yearProduction = $yearProduction;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'brandId' => $this->brandId,
+            'modelId' => $this->modelId,
+            'modificationId' => $this->modificationId,
+            'bodyTypeId' => $this->bodyTypeId,
+            'yearProduction' => $this->yearProduction,
+        ];
     }
 }

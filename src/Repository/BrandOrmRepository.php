@@ -62,8 +62,11 @@ class BrandOrmRepository extends ServiceEntityRepository implements BrandReposit
     /**
      * @inheritDoc
      */
-    public function getAll($criteria = null)
+    public function getAll($criteria = null, ?int $page = null, ?int $size = null)
     {
-        return $this->findBy($criteria ?: []);
+        $limit = $size ?: null;
+        $offset = $page ? ($page-1) * $limit : null;
+
+        return $this->findBy($criteria ?: [], ['id' => 'asc'], $limit, $offset);
     }
 }

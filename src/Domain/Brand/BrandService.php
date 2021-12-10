@@ -22,6 +22,16 @@ class BrandService
     }
 
     /**
+     * Репа
+     *
+     * @return BrandRepository
+     */
+    public function getRepo(): BrandRepository
+    {
+        return $this->repo;
+    }
+
+    /**
      * Создание
      *
      * @param string $name
@@ -49,7 +59,7 @@ class BrandService
             throw new NotFoundEntity(Brand::class);
         }
         
-        $entity->name = $name;
+        $entity->setName($name);
         $this->repo->save($entity);
 
         return $entity;
@@ -68,17 +78,6 @@ class BrandService
     }
 
     /**
-     * Поиск записей
-     *
-     * @param mixed $criteria
-     * @return Brand[]
-     */
-    public function getAll($criteria = null)
-    {
-        return $this->repo->getAll($criteria);
-    }
-
-    /**
      * Поиск записи по ид
      *
      * @param int $id
@@ -87,5 +86,101 @@ class BrandService
     public function getById(int $id): ?Brand
     {
         return $this->repo->getById($id);
+    }
+
+    /**
+     * Генерирует данные
+     *
+     * @return void
+     */
+    public function generate(): void
+    {
+        $names = [
+            "AUDI",
+            "ACURA",
+            "ALFA ROMEO",
+            "ASTON MARTIN",
+            "BENTLEY",
+            "BYD",
+            "BMW",
+            "BRILLIANCE",
+            "BUICK",
+            "BUGATTI",
+            "CADILLAC",
+            "CHANGAN",
+            "CHEVROLET",
+            "CHERY",
+            "CHRYSLER",
+            "CITROEN",
+            "DAEWOO",
+            "DACIA",
+            "DAIHATSU",
+            "DODGE",
+            "FAW",
+            "FERRARI",
+            "FIAT",
+            "FORD",
+            "GEELY",
+            "GMC",
+            "GREAT WALL",
+            "HONDA",
+            "HUMMER",
+            "HYUNDAI",
+            "INFINITI",
+            "JAGUAR",
+            "JEEP",
+            "KIA",
+            "LAMBORGHINI",
+            "LAND ROVER",
+            "LANCIA",
+            "LEXUS",
+            "LIFAN",
+            "LINCOLN",
+            "LOTUS",
+            "MARUSSIA",
+            "MAYBACH",
+            "MAZDA",
+            "MERCEDES",
+            "MASERATI",
+            "MINI",
+            "MCLAREN",
+            "MITSUBISHI",
+            "NISSAN",
+            "OPEL",
+            "PEUGEOT",
+            "PORSCHE",
+            "RENAULT",
+            "SAAB",
+            "SEAT",
+            "SKODA",
+            "SUBARU",
+            "SUZUKI",
+            "TOYOTA",
+            "PONTIAC",
+            "ROLLS-ROYCE",
+            "SMART",
+            "SSANGYONG",
+            "TESLA",
+            "VOLVO",
+            "VOLKSWAGEN",
+            "ВАЗ",
+            "ГАЗ",
+            "ЗАЗ",
+            "TAGAZ",
+            "УАЗ",
+            "МОТОЦИКЛ",
+            "HAVAL",
+            "ROVER",
+            "МОСКВИЧ",
+            "DATSUN",
+            "GAC",
+            "GENESIS",
+            "EXEED",
+            "МОСКВИЧ",
+        ];
+
+        foreach ($names as $name) {
+            $this->create($name);
+        }
     }
 }

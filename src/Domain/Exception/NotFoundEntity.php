@@ -11,6 +11,6 @@ class NotFoundEntity extends Exception
 {
     public function __construct(string $entityClassName)
     {
-        parent::__construct($entityClassName);
+        parent::__construct("Entity '{$entityClassName}' not found");
     }
 }

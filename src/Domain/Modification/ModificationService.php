@@ -29,6 +29,16 @@ class ModificationService
     }
 
     /**
+     * Репа
+     *
+     * @return ModificationRepository
+     */
+    public function getRepo(): ModificationRepository
+    {
+        return $this->repo;
+    }
+
+    /**
      * Создание
      *
      * @param int $modelId
@@ -93,17 +103,6 @@ class ModificationService
     {
         // удаление без проверок
         $this->repo->delete($id);
-    }
-
-    /**
-     * Поиск записей
-     *
-     * @param mixed $criteria
-     * @return Modification[]
-     */
-    public function getAll($criteria = null)
-    {
-        return $this->repo->getAll($criteria);
     }
 
     /**

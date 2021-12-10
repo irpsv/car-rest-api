@@ -3,6 +3,7 @@
 namespace App\Domain\Helper;
 
 use App\Domain\Exception\ArrayNotExistRequiredField;
+use ReflectionClass;
 
 /**
  * Хелпер для работы с массивами
@@ -42,10 +43,18 @@ class ArrayHelper
     {
         $isChanged = false;
 
+        $refClass = new ReflectionClass($entity);
         foreach ($fields as $name) {
-            if (array_key_exists($name, $data) && property_exists($entity, $name)) {
-                // приведение типов оставляем на типизации
-                $entity->{$name} = $data[$name];
+            if (array_key_exists($name, $data) && $refClass->hasProperty($name)) {
+                $refProp = $refClass->getProperty($name);
+                if (!$refProp->isPublic() && $refClass->hasMethod('set'.$name)) {
+                    $refMethod = $refClass->getMethod('set'.$name);
+                    $refMethod->invoke($entity, $data[$name]);
+                }
+                else {
+                    // даже если свойство не публичное, присваиваем, чтобы словить стандартную ошибку
+                    $entity->{$name} = $data[$name];
+                }
                 $isChanged = true;
             }
         }

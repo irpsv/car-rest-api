@@ -2,9 +2,8 @@
 
 namespace App\Domain;
 
-use App\Domain\Brand\BrandRepository;
-use App\Domain\Exception\CantCreateWihtoutName;
 use App\Domain\Helper\IdentifiedEntity;
+use App\Domain\Helper\Nameable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,24 +11,31 @@ use Doctrine\ORM\Mapping as ORM;
  * 
  * @ORM\Entity(repositoryClass=BrandRepository::class)
  */
-class Brand
+class Brand extends Entity
 {
     use IdentifiedEntity;
+    use Nameable;
     
     /**
      * @var string
      * 
      * @ORM\Column(type="string", length=255)
      */
-    public string $name;
+    protected string $name;
 
     public function __construct(string $name)
     {
-        $name = trim($name);
-        if (empty($name)) {
-            throw new CantCreateWihtoutName(get_called_class());
-        }
+        $this->setName($name);
+    }
 
-        $this->name = $name;
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->name,
+        ];
     }
 }

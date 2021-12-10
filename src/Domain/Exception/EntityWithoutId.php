@@ -14,6 +14,6 @@ class EntityWithoutId extends Exception
      */
     public function __construct(string $className)
     {
-        parent::__construct($className);
+        parent::__construct("Entity '{$className}' without id");
     }
 }

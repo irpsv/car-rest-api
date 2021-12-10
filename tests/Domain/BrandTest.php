@@ -3,7 +3,7 @@
 namespace App\Tests\Domain;
 
 use App\Domain\Brand\BrandService;
-use App\Domain\Exception\CantCreateWihtoutName;
+use App\Domain\Exception\NameIsRequired;
 use App\Tests\Domain\Stub\BrandStubRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -42,7 +42,7 @@ class BrandTest extends TestCase
         $audi = $service->create('Audi');
         $mers = $service->create('Mercedes-Benz');
 
-        $brands = $service->getAll();
+        $brands = $service->getRepo()->getAll();
         $this->assertCount(3, $brands);
         $this->assertEquals($brands[1]->getId(), $bmw->getId());
         $this->assertEquals($brands[2]->getId(), $audi->getId());
@@ -58,7 +58,7 @@ class BrandTest extends TestCase
     {
         $service = $this->getService();
 
-        $this->expectException(CantCreateWihtoutName::class);
+        $this->expectException(NameIsRequired::class);
         $service->create('');
     }
 
@@ -72,11 +72,11 @@ class BrandTest extends TestCase
         $service = $this->getService();
 
         $mers = $service->create('Mercedes');
-        $this->assertEquals($mers->name, 'Mercedes');
+        $this->assertEquals($mers->getName(), 'Mercedes');
 
         $id = $mers->getId();
         $mers = $service->update($id, 'Mercedes-Benz');
-        $this->assertEquals($mers->name, 'Mercedes-Benz');
+        $this->assertEquals($mers->getName(), 'Mercedes-Benz');
         $this->assertEquals($mers->getId(), $id, 'После сохранения ид не совпадают');
     }
 

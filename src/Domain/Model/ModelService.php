@@ -28,6 +28,16 @@ class ModelService
     }
 
     /**
+     * Репа
+     *
+     * @return ModelRepository
+     */
+    public function getRepo(): ModelRepository
+    {
+        return $this->repo;
+    }
+
+    /**
      * Создание
      *
      * @param int $brandId
@@ -77,17 +87,6 @@ class ModelService
     {
         // удаление без проверок
         $this->repo->delete($id);
-    }
-
-    /**
-     * Поиск записей
-     *
-     * @param mixed $criteria
-     * @return Model[]
-     */
-    public function getAll($criteria = null)
-    {
-        return $this->repo->getAll($criteria);
     }
 
     /**

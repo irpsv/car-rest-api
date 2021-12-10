@@ -22,6 +22,16 @@ class BodyTypeService
     }
 
     /**
+     * Репа
+     *
+     * @return BodyTypeRepository
+     */
+    public function getRepo(): BodyTypeRepository
+    {
+        return $this->repo;
+    }
+
+    /**
      * Создание
      *
      * @param string $name
@@ -49,7 +59,7 @@ class BodyTypeService
             throw new NotFoundEntity(BodyType::class);
         }
         
-        $entity->name = $name;
+        $entity->setName($name);
         $this->repo->save($entity);
 
         return $entity;
@@ -65,17 +75,6 @@ class BodyTypeService
     {
         // удаление без проверок
         $this->repo->delete($id);
-    }
-
-    /**
-     * Поиск записей
-     *
-     * @param mixed $criteria
-     * @return BodyType[]
-     */
-    public function getAll($criteria = null)
-    {
-        return $this->repo->getAll($criteria);
     }
 
     /**

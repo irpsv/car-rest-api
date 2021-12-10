@@ -35,6 +35,16 @@ class CarService
     }
 
     /**
+     * Репа
+     *
+     * @return CarRepository
+     */
+    public function getRepo(): CarRepository
+    {
+        return $this->repo;
+    }
+
+    /**
      * Создание
      *
      * @param int $modificationId
@@ -82,17 +92,6 @@ class CarService
     {
         // удаление без проверок
         $this->repo->delete($id);
-    }
-
-    /**
-     * Поиск записей
-     *
-     * @param mixed $criteria
-     * @return Car[]
-     */
-    public function getAll($criteria = null)
-    {
-        return $this->repo->getAll($criteria);
     }
 
     /**

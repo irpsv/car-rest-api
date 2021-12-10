@@ -42,7 +42,7 @@ class CarStubRepository extends BaseRepo implements CarRepository
     /**
      * @inheritDoc
      */
-    public function getAll($criteria = null)
+    public function getAll($criteria = null, ?int $page = null, ?int $size = null)
     {
         return $this->getItems();
     }
